@@ -531,9 +531,8 @@ function renderPlantao() {
         : tipo === "P2"
           ? "🚐 Reserva — viagens externas e emergências"
           : "🚑 Primeira opção — disponível para viagem";
-      const regraHtml = tipo === "P3"
-        ? '<div><span class="rs ' + rs + '">' + rl + '</span></div>'
-        : '<div><span class="rs rs-ok">✅ Sempre disponível</span></div>';
+      const regraHtml = '<div><span class="rs rs-ok">✅ Sempre disponível</span></div>';
+  
       return '<div class="pc pc-' + cls + '">'
         + '<div class="pc-badge">' + tipo + '</div>'
         + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'
