@@ -178,6 +178,14 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
 .row-sep-data td{background:var(--s3);padding:7px 14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--border)}
 .fut-badge{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--p3)}
 .aviso-postagem{background:#e8f0fb;border:1px solid #90b8e8;border-radius:10px;padding:9px 16px;margin-bottom:14px;font-size:12px;color:var(--p3);display:flex;align-items:center;gap:8px}
+
+/* ── BANNER DE VALIDAÇÃO ── */
+.val-banner{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.val-item{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid}
+.val-ok{background:#e6f9f2;border-color:#9adfc5;color:#0a7c55}
+.val-warn{background:#fdf5e0;border-color:#e8c96a;color:#b07800}
+.val-err{background:#fff0f2;border-color:#f0aab5;color:#c0283e}
+
 @media(max-width:1100px){.row2,.row3{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}.plantao-grid{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr 1fr}.viagens-kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.plantao-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.page{padding:12px}.tab-btn{font-size:13px;padding:10px 12px}.brand-text h1{font-size:17px}.viagens-kpis{grid-template-columns:repeat(2,1fr)}}
 @media print{
@@ -210,6 +218,7 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
 </header>
 
 <div id="alertaPeriodo"></div>
+<div id="valBanner" class="val-banner"></div>
 <div id="banner"></div>
 
 <div class="tabs">
@@ -245,94 +254,38 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
 
 <!-- ── ABA VIAGENS ── -->
 <div class="tab-panel" id="panelViagens">
-
-  <!-- KPIs resumo -->
   <div class="viagens-kpis" style="grid-template-columns:repeat(5,1fr)">
-    <div class="kpi c0">
-      <div class="kpi-lbl">Viagens Hoje</div>
-      <div class="kpi-val" id="vkHoje">--</div>
-      <div class="kpi-sub" id="vkHojeData">--</div>
-    </div>
-    <div class="kpi c1">
-      <div class="kpi-lbl">Viagens Ontem</div>
-      <div class="kpi-val" id="vkOntem">--</div>
-      <div class="kpi-sub" id="vkOntemData">--</div>
-    </div>
-    <div class="kpi c2">
-      <div class="kpi-lbl">Motoristas Hoje</div>
-      <div class="kpi-val" id="vkMots">--</div>
-      <div class="kpi-sub">em serviço hoje</div>
-    </div>
-    <div class="kpi c3">
-      <div class="kpi-lbl">Pacientes Hoje</div>
-      <div class="kpi-val" id="vkPac">--</div>
-      <div class="kpi-sub">total transportados</div>
-    </div>
-    <div class="kpi c2">
-      <div class="kpi-lbl">Próximas Viagens</div>
-      <div class="kpi-val" id="vkFuturas">--</div>
-      <div class="kpi-sub" id="vkFuturasSub">agendadas</div>
-    </div>
+    <div class="kpi c0"><div class="kpi-lbl">Viagens Hoje</div><div class="kpi-val" id="vkHoje">--</div><div class="kpi-sub" id="vkHojeData">--</div></div>
+    <div class="kpi c1"><div class="kpi-lbl">Viagens Ontem</div><div class="kpi-val" id="vkOntem">--</div><div class="kpi-sub" id="vkOntemData">--</div></div>
+    <div class="kpi c2"><div class="kpi-lbl">Motoristas Hoje</div><div class="kpi-val" id="vkMots">--</div><div class="kpi-sub">em serviço hoje</div></div>
+    <div class="kpi c3"><div class="kpi-lbl">Pacientes Hoje</div><div class="kpi-val" id="vkPac">--</div><div class="kpi-sub">total transportados</div></div>
+    <div class="kpi c2"><div class="kpi-lbl">Próximas Viagens</div><div class="kpi-val" id="vkFuturas">--</div><div class="kpi-sub" id="vkFuturasSub">agendadas</div></div>
   </div>
-
-  <!-- Tabela unificada: ontem + hoje -->
   <div class="card">
-    <div class="card-hd">
-      <h3>🚐 VIAGENS DE ONTEM E HOJE</h3>
-      <span id="vSubtitle">--</span>
-    </div>
+    <div class="card-hd"><h3>🚐 VIAGENS DE ONTEM E HOJE</h3><span id="vSubtitle">--</span></div>
     <div class="log-toolbar">
       <input class="viagens-search" id="viagensSearch" type="text" placeholder="🔍  Buscar motorista, destino, placa...">
     </div>
     <div style="overflow-x:auto">
       <table class="vt">
-        <thead>
-          <tr>
-            <th>Dia</th>
-            <th>Motorista</th>
-            <th>Destino</th>
-            <th>Placa</th>
-            <th>Saída</th>
-            <th>Pacientes</th>
-            <th>Obs</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Dia</th><th>Motorista</th><th>Destino</th><th>Placa</th><th>Saída</th><th>Pacientes</th><th>Obs</th></tr></thead>
         <tbody id="viagensTbody"></tbody>
       </table>
     </div>
   </div>
-
-  <!-- Aviso de postagem após 19h -->
   <div class="aviso-postagem" id="avisoPostagem" style="display:none">
-    📋 Viagens postadas após 19h aparecem aqui imediatamente e ficam visíveis para o grupo.
-    Elas passam para "hoje" automaticamente à meia-noite.
+    📋 Viagens postadas após 19h aparecem aqui imediatamente e ficam visíveis para o grupo. Elas passam para "hoje" automaticamente à meia-noite.
   </div>
-
-  <!-- Card viagens futuras -->
   <div class="card" id="cardFuturas" style="display:none">
-    <div class="card-hd">
-      <h3>📋 PRÓXIMAS VIAGENS AGENDADAS</h3>
-      <span id="vFuturasSub">--</span>
-    </div>
+    <div class="card-hd"><h3>📋 PRÓXIMAS VIAGENS AGENDADAS</h3><span id="vFuturasSub">--</span></div>
     <div style="overflow-x:auto">
       <table class="vt">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Motorista</th>
-            <th>Destino</th>
-            <th>Placa</th>
-            <th>Saída</th>
-            <th>Pacientes</th>
-            <th>Obs</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Data</th><th>Motorista</th><th>Destino</th><th>Placa</th><th>Saída</th><th>Pacientes</th><th>Obs</th></tr></thead>
         <tbody id="futurasTbody"></tbody>
       </table>
     </div>
   </div>
-
-</div><!-- fim panelViagens -->
+</div>
 
 <!-- ABA ESCALA DO MÊS -->
 <div class="tab-panel" id="panelEscala">
@@ -376,9 +329,7 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
   </div>
   <div class="card">
     <div class="card-hd"><h3>📄 REGISTRO DE VIAGENS</h3><span id="logSub">--</span></div>
-    <div class="log-toolbar">
-      <input class="log-search" id="logSearch" type="text" placeholder="🔍  Buscar motorista, destino, placa...">
-    </div>
+    <div class="log-toolbar"><input class="log-search" id="logSearch" type="text" placeholder="🔍  Buscar motorista, destino, placa..."></div>
     <div class="log-wrap"><table class="log"><thead><tr><th>Data</th><th>Motorista</th><th>Destino</th><th>Placa</th><th>Hora</th><th>Obs</th></tr></thead><tbody id="logTbody"></tbody></table></div>
   </div>
 </div>
@@ -403,56 +354,55 @@ const CONFIG = {
   // ══════════════════════════════════════════════════════════════════════════
   // 1. CABEÇALHO DO MÊS
   // ══════════════════════════════════════════════════════════════════════════
-  MES_LABEL : "MARÇO 2026",
-  INICIO    : "06/03/2026",
-  FIM       : "05/04/2026",
+  MES_LABEL : "ABRIL 2026",
+  INICIO    : "06/04/2026",
+  FIM       : "05/05/2026",
 
   // ══════════════════════════════════════════════════════════════════════════
-  // 2. RODÍZIO MENSAL DOS TIMES
+  // 2. RODÍZIO MENSAL — COMO ATUALIZAR NO GITHUB
   //
   //  ┌─ REGRA ──────────────────────────────────────────────────────────────┐
-  //  │  Todo mês: recorte a 1ª linha e cole como última linha da lista.    │
-  //  │  Os grupos se reorganizam automaticamente pela nova ordem.           │
+  //  │  Todo início de mês, 3 passos:                                      │
+  //  │  1. Recorte a linha marcada "▼ PRÓXIMO A DESCER"                    │
+  //  │  2. Cole-a como última linha (antes do comentário "← cole aqui")    │
+  //  │  3. Atualize INICIO, FIM, MES_LABEL e as ESCALAs de todos          │
   //  └──────────────────────────────────────────────────────────────────────┘
   //
   //  Como fazer no GitHub:
-  //  1. Clique no lápis ✏️ para editar
-  //  2. Posicione o cursor na linha marcada com ← PRÓXIMO A DESCER
-  //  3. Selecione a linha inteira: Home → Shift+↓
-  //  4. Recorte: Ctrl+X  (Mac: ⌘+X)
-  //  5. Vá até a última linha antes do ], e cole: Ctrl+V  (Mac: ⌘+V)
-  //  6. Atualize a ESCALA de todos com os dias/postos do novo mês
-  //  7. Commit changes
-  //
-  // ══════════════════════════════════════════════════════════════════════════
-  // 3. ESCALA DOS MOTORISTAS
-  //
-  //  Formato:  "DIA:POSTO  DIA:POSTO  ..."
-  //  Postos:   P1   P2   P3   FERIAS   RECESSO
-  //  Intervalos: "7-16:FERIAS"  "17-23:RECESSO"
-  //  Dias menores que INICIO pertencem ao mês seguinte.
+  //  1. Clique no lápis ✏️ para editar este arquivo
+  //  2. Selecione a linha marcada com ← PRÓXIMO A DESCER (Home → Shift+↓)
+  //  3. Recorte: Ctrl+X  (Mac: ⌘+X)
+  //  4. Posicione o cursor na linha "← cole aqui..." e cole: Ctrl+V
+  //  5. Atualize INICIO / FIM / MES_LABEL para o novo ciclo
+  //  6. Atualize a ESCALA de cada motorista com os dias/postos do novo mês
+  //  7. Commit changes — o dashboard atualiza automaticamente
   //
   //  ┌──────────────────────────────────────────────────────────────────────┐
-  //  │  MARÇO 2026 — próximo a descer no rodízio de abril: PELKIN          │
+  //  │  ABRIL 2026 — próximo a descer no rodízio de MAIO: ROMÁRIO          │
   //  └──────────────────────────────────────────────────────────────────────┘
   //
-  //   NOME              FONE           PLACA        ESCALA
+  //  Formato ESCALA:  "DIA:POSTO  DIA:POSTO  ..."
+  //  Postos válidos:  P1  P2  P3  FERIAS  RECESSO
+  //  Intervalos:      "6-25:FERIAS"   "17-23:RECESSO"
+  //  Dias < INICIO → pertencem ao mês seguinte (maio neste caso)
+  //
+  // ══════════════════════════════════════════════════════════════════════════
   MOTORISTAS: [
 
-    // ▼ PRÓXIMO A DESCER — recorte esta linha e cole no final em abril ▼
-    { NOME:"PELKIN",       FONE:"99884-4437", PLACA:"SIL-9E23",  ESCALA:"7:P2  11:P1  15:P2  19:P1  23:P2  27:P1  31:P2   4:P1" },
-    // ▲ ─────────────────────────────────────────────────────────────── ▲
+    // ▼ PRÓXIMO A DESCER — recorte esta linha e cole no final em MAIO ▼
+    { NOME:"ROMÁRIO",      FONE:"98139-4366", PLACA:"QAB-5799", ESCALA:"8:P1  12:P2  16:P1  20:P2  24:P1  28:P2  2:P1" },
+    // ▲ ──────────────────────────────────────────────────────────── ▲
 
-    { NOME:"ROMARIO",      FONE:"98139-4366", PLACA:"QAB-5799",  ESCALA:"7:P1  11:P2  15:P1  19:P2  23:P1  27:P2  31:P1   4:P2" },
-    { NOME:"EDMAR",        FONE:"99947-5310", PLACA:"RWH-0D64",  ESCALA:"8:P1  12:P2  16:P3  20:P1  24:P2  28:P3   1:P1   5:P2" },
-    { NOME:"JOSE MANOEL",  FONE:"99265-1581", PLACA:"SID-7G71",  ESCALA:"8:P2  12:P3  16:P1  20:P2  24:P3  28:P1   1:P2   5:P3" },
-    { NOME:"ROBSON",       FONE:"99641-7423", PLACA:"RWH-0D67",  ESCALA:"8:P3  12:P1  16:P2  20:P3  24:P1  28:P2   1:P3   5:P1" },
-    { NOME:"COSME",        FONE:"99677-0467", PLACA:"SYX-9F79",  ESCALA:"7-16:FERIAS  17:P1  21:P2  25:P3  29:P1   2:P2"        },
-    { NOME:"SILVIO",       FONE:"99644-7196", PLACA:"TEA-4A97",  ESCALA:"9:P2  13:P1  17:P2  21:P3  25:P1  29:P2   2:P3"        },
-    { NOME:"PAULO GAIOLA", FONE:"99957-2433", PLACA:"RWB-4G28",  ESCALA:"9:P1  13:P2  17:P3  21:P1  25:P2  29:P3   2:P1"        },
-    { NOME:"IVO LEAL",     FONE:"99697-3163", PLACA:"RWA-0J92",  ESCALA:"6:P3  10:P1  14:P2  17-23:RECESSO  26:P1  30:P2  3:P3" },
-    { NOME:"ODAIR",        FONE:"99949-6233", PLACA:"QAU-4F33",  ESCALA:"6:P1  10:P2  14:P3  18:P1  22:P2  26:P3  30:P1  3:P2"  },
-    { NOME:"EDIPO",        FONE:"99122-6035", PLACA:"GCW-5C63",  ESCALA:"6:P2  10:P3  14:P1  18:P2  22:P1  26:P2  30:P3  3:P1"  },
+    { NOME:"EDMAR",        FONE:"99947-5310", PLACA:"RWH-0D64", ESCALA:"8:P2  12:P1  16:P2  20:P1  24:P2  28:P1  2:P2" },
+    { NOME:"JOSE MANOEL",  FONE:"99265-1581", PLACA:"SID-7G71", ESCALA:"9:P1  13:P2  17:P3  21:P1  25:P2  29:P3  3:P1" },
+    { NOME:"ROBSON",       FONE:"99641-7423", PLACA:"RWH-0D67", ESCALA:"9:P2  13:P3  17:P1  21:P2  25:P3  29:P1  3:P2" },
+    { NOME:"COSME",        FONE:"99677-0467", PLACA:"SYX-9F79", ESCALA:"9:P3  13:P1  17:P2  21:P3  25:P1  29:P2  3:P3" },
+    { NOME:"SILVIO",       FONE:"99644-7196", PLACA:"TEA-4A97", ESCALA:"6:P1  10:P2  14:P3  18:P1  22:P2  26:P3  30:P1  4:P2" },
+    { NOME:"PAULO GAIOLA", FONE:"99957-2433", PLACA:"RWB-4G28", ESCALA:"6:P2  10:P3  14:P1  18:P2  22:P3  26:P1  30:P2  4:P3" },
+    { NOME:"IVO LEAL",     FONE:"99697-3163", PLACA:"RWA-0J92", ESCALA:"6:P3  10:P1  14:P2  18:P3  22:P1  26:P2  30:P3  4:P1" },
+    { NOME:"ODAIR",        FONE:"99949-6233", PLACA:"QAU-4F33", ESCALA:"7:P1  11:P2  15:P1  19:P2  23:P1  27:P2  1:P3   5:P1" },
+    { NOME:"EDIPO",        FONE:"99122-6035", PLACA:"GCW-5C63", ESCALA:"7:P2  11:P1  15:P2  19:P1  23:P2  27:P3  1:P1   5:P2" },
+    { NOME:"PELKIN",       FONE:"99884-4437", PLACA:"SIL-9E23", ESCALA:"6-25:FERIAS  27:P1  1:P2  5:P3" },
 
     // ← cole aqui a linha recortada do topo (antes deste comentário)
   ],
@@ -466,8 +416,72 @@ const CONFIG = {
 };
 
 // =============================================================================
-//  ⚙️  SISTEMA — NÃO É NECESSÁRIO EDITAR ABAIXO DESTA LINHA
+//  ⚙️  SISTEMA — NÃO EDITAR ABAIXO DESTA LINHA
 // =============================================================================
+
+// ── VALIDAÇÃO AUTOMÁTICA DA ESCALA ───────────────────────────────────────────
+function validarEscala(mots, iniDate, fimDate) {
+  const alerts = [];
+  const dayMap = {};
+  mots.forEach(function(m) {
+    Object.entries(m.escalaMap).forEach(function([key, turno]) {
+      if (!dayMap[key]) dayMap[key] = {};
+      if (!dayMap[key][turno]) dayMap[key][turno] = [];
+      dayMap[key][turno].push(m.nome);
+    });
+  });
+  // 1. Conflito de turno no mesmo dia
+  Object.entries(dayMap).forEach(function([key, turnos]) {
+    ["P1","P2","P3"].forEach(function(t) {
+      if (turnos[t] && turnos[t].length > 1) {
+        const dp = key.split("-");
+        alerts.push({ tipo:"err", msg:"⚠️ Conflito " + t + " dia " + dp[2] + "/" + dp[1] + ": " + turnos[t].join(" + ") });
+      }
+    });
+  });
+  // 2. Motorista de férias escalado para trabalhar no mesmo dia
+  mots.forEach(function(m) {
+    const ferDias = Object.entries(m.escalaMap).filter(function([,v]){ return v==="FERIAS"||v==="RECESSO"; }).map(function([k]){ return k; });
+    const trabDias = Object.entries(m.escalaMap).filter(function([,v]){ return v!=="FERIAS"&&v!=="RECESSO"; }).map(function([k]){ return k; });
+    ferDias.forEach(function(fd) {
+      if (trabDias.includes(fd)) {
+        const dp = fd.split("-");
+        alerts.push({ tipo:"err", msg:"⚠️ " + m.nome + " está de férias e escalado no dia " + dp[2] + "/" + dp[1] });
+      }
+    });
+  });
+  // 3. P3 descoberto em dias com só 2 do grupo ativo
+  const cur = new Date(iniDate);
+  while (cur <= fimDate) {
+    const key = dk(cur);
+    const t = dayMap[key] || {};
+    if ((t["P1"]||[]).length===1 && (t["P2"]||[]).length===1 && (!t["P3"]||(t["P3"]||[]).length===0)) {
+      alerts.push({ tipo:"warn", msg:"! P3 descoberto: " + String(cur.getDate()).padStart(2,"0") + "/" + String(cur.getMonth()+1).padStart(2,"0") });
+    }
+    cur.setDate(cur.getDate()+1);
+  }
+  // 4. Motorista duplicado
+  const nomesVistos = new Set();
+  mots.forEach(function(m) {
+    if (nomesVistos.has(m.nome)) alerts.push({ tipo:"err", msg:"⚠️ Motorista duplicado na escala: " + m.nome });
+    nomesVistos.add(m.nome);
+  });
+  return alerts;
+}
+
+function renderValBanner(mots, iniDate, fimDate) {
+  const items = validarEscala(mots, iniDate, fimDate);
+  const errs  = items.filter(function(i){ return i.tipo==="err"; });
+  const warns = items.filter(function(i){ return i.tipo==="warn"; });
+  let html = "";
+  if (!errs.length && !warns.length) {
+    html = '<div class="val-item val-ok">✅ Escala válida — nenhum conflito detectado para ' + CONFIG.MES_LABEL + '</div>';
+  } else {
+    if (errs.length)  html += errs.map(function(i){ return '<div class="val-item val-err">' + esc(i.msg) + '</div>'; }).join("");
+    if (warns.length) html += '<div class="val-item val-warn">⚠️ ' + warns.length + ' turno(s) P3 descoberto(s) — PELKIN em férias (grupo D com 2 motoristas)</div>';
+  }
+  document.getElementById("valBanner").innerHTML = html;
+}
 
 function parseConfig() {
   const [d0, m0, y0] = CONFIG.INICIO.split("/").map(Number);
@@ -521,7 +535,6 @@ let fetchTimer = null, nextFetch = null;
   MCORE[nome] = CORES[i % CORES.length];
 });
 
-// ── UTILIDADES ────────────────────────────────────────────────────────────────
 function esc(s) {
   return String(s || "")
     .replace(/&/g,"&amp;").replace(/</g,"&lt;")
@@ -534,14 +547,12 @@ function dk(date) {
     + String(date.getMonth()+1).padStart(2,"0") + "-"
     + String(date.getDate()).padStart(2,"0");
 }
-// Converte "DD/MM/AAAA" em string comparável "AAAA-MM-DD"
 function dtToKey(dt) {
   if (!dt || !dt.includes("/")) return "";
   const p = dt.split("/");
   if (p.length < 3) return "";
   return p[2] + "-" + p[1].padStart(2,"0") + "-" + p[0].padStart(2,"0");
 }
-// Formata data para exibição "DD/MM"
 function fmtDia(dt) {
   if (!dt) return "--";
   const p = dt.split("/");
@@ -551,7 +562,6 @@ function showTip(e,h){ const t=document.getElementById("tip"); t.innerHTML=h; t.
 function moveTip(e){ const t=document.getElementById("tip"); t.style.left=(e.clientX+14)+"px"; t.style.top=(e.clientY-10)+"px"; }
 function hideTip(){ document.getElementById("tip").style.display="none"; }
 
-// ── ABAS ──────────────────────────────────────────────────────────────────────
 function switchTab(tabName) {
   document.querySelectorAll(".tab-btn").forEach(function(b) {
     b.classList.toggle("active", b.dataset.tab === tabName);
@@ -561,7 +571,6 @@ function switchTab(tabName) {
   if (panel) panel.classList.add("active");
 }
 
-// ── RENDER PLANTÃO ────────────────────────────────────────────────────────────
 function renderPlantao() {
   const now = new Date(), h = now.getHours();
   const ref = new Date(now);
@@ -662,51 +671,32 @@ function renderPlantao() {
   document.getElementById("proxTbody").innerHTML = rows.join("") || '<tr><td colspan="6" class="empty">Sem dados no período</td></tr>';
 }
 
-// ── RENDER VIAGENS (ONTEM + HOJE + FUTURAS) ───────────────────────────────────
 function renderViagens() {
   const agora = new Date();
-  // Alinha com plantão: antes das 6h considera ainda o dia anterior como "hoje"
   const refHoje = new Date(agora);
   if (agora.getHours() < 6) refHoje.setDate(refHoje.getDate() - 1);
   refHoje.setHours(0,0,0,0);
-
   const hojeKey  = dk(refHoje);
   const ontemDate = new Date(refHoje); ontemDate.setDate(refHoje.getDate() - 1);
   const ontemKey = dk(ontemDate);
-  const amanhaDate = new Date(refHoje); amanhaDate.setDate(refHoje.getDate() + 1);
-  const amanhaKey = dk(amanhaDate);
 
-  function keyToDt(k) {
-    const p = k.split("-");
-    return p[2] + "/" + p[1] + "/" + p[0];
-  }
-
+  function keyToDt(k) { const p = k.split("-"); return p[2] + "/" + p[1] + "/" + p[0]; }
   const hojeStr  = keyToDt(hojeKey);
   const ontemStr = keyToDt(ontemKey);
 
   function sortByHora(arr) {
-    return arr.slice().sort(function(a,b){
-      return (a.hora||"99:99").localeCompare(b.hora||"99:99");
-    });
+    return arr.slice().sort(function(a,b){ return (a.hora||"99:99").localeCompare(b.hora||"99:99"); });
   }
 
-  // Filtra viagens dos dois dias (ontem + hoje)
-  const rowsHoje  = VIAGENS.filter(function(r){ return dtToKey(r.dt) === hojeKey;  });
+  const rowsHoje  = VIAGENS.filter(function(r){ return dtToKey(r.dt) === hojeKey; });
   const rowsOntem = VIAGENS.filter(function(r){ return dtToKey(r.dt) === ontemKey; });
-
-  // Filtra viagens futuras (a partir de amanhã)
-  const rowsFuturas = VIAGENS.filter(function(r){
-    const k = dtToKey(r.dt);
-    return k > hojeKey; // chaves AAAA-MM-DD: comparação lexicográfica funciona
-  });
-  // Ordena futuras por data → hora
+  const rowsFuturas = VIAGENS.filter(function(r){ return dtToKey(r.dt) > hojeKey; });
   rowsFuturas.sort(function(a,b){
     const ka = dtToKey(a.dt), kb = dtToKey(b.dt);
     if (ka !== kb) return ka.localeCompare(kb);
     return (a.hora||"99:99").localeCompare(b.hora||"99:99");
   });
 
-  // KPIs
   const motsHoje = new Set(rowsHoje.map(function(r){ return r.m; })).size;
   const pacHoje  = rowsHoje.reduce(function(s,r){ return s+(parseInt(r.pac)||0); }, 0);
 
@@ -717,29 +707,20 @@ function renderViagens() {
   document.getElementById("vkFuturas").textContent   = rowsFuturas.length  || "--";
   document.getElementById("vkHojeData").textContent  = hojeStr;
   document.getElementById("vkOntemData").textContent = ontemStr;
-  document.getElementById("vkFuturasSub").textContent = rowsFuturas.length === 1
-    ? "1 agendada" : rowsFuturas.length + " agendadas";
-  document.getElementById("vSubtitle").textContent =
-    rowsHoje.length + " hoje · " + rowsOntem.length + " ontem";
+  document.getElementById("vkFuturasSub").textContent = rowsFuturas.length === 1 ? "1 agendada" : rowsFuturas.length + " agendadas";
+  document.getElementById("vSubtitle").textContent = rowsHoje.length + " hoje · " + rowsOntem.length + " ontem";
 
-  // Aviso de postagem: aparece a partir das 19h
   const avisoEl = document.getElementById("avisoPostagem");
   avisoEl.style.display = agora.getHours() >= 19 ? "flex" : "none";
 
-  // Cache ontem+hoje para a tabela principal
   viagensCache = sortByHora(rowsHoje).concat(sortByHora(rowsOntem));
   renderViagensTbody(hojeKey, ontemKey);
 
-  // Card de futuras
   const cardFut = document.getElementById("cardFuturas");
   const futSub  = document.getElementById("vFuturasSub");
-  if (!rowsFuturas.length) {
-    cardFut.style.display = "none";
-    return;
-  }
+  if (!rowsFuturas.length) { cardFut.style.display = "none"; return; }
   cardFut.style.display = "";
 
-  // Agrupa futuras por data com separador
   const DIAS_PT = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
   let htmlFut = "", lastKey = "";
   rowsFuturas.forEach(function(r) {
@@ -752,11 +733,8 @@ function renderViagens() {
       const sufixo = diasAte === 1
         ? "<span style='color:var(--p3);font-weight:800'>● AMANHÃ</span>"
         : "<span style='color:var(--muted)'>em " + diasAte + " dias</span>";
-      const diaSem = DIAS_PT[rDate.getDay()];
-      htmlFut += "<tr class='row-sep-data'><td colspan='7'>"
-        + "<span style='color:var(--p3)'>" + diaSem + " · " + esc(r.dt) + "</span>"
-        + " &nbsp;" + sufixo
-        + "</td></tr>";
+      htmlFut += "<tr class='row-sep-data'><td colspan='7'><span style='color:var(--p3)'>"
+        + DIAS_PT[rDate.getDay()] + " · " + esc(r.dt) + "</span> &nbsp;" + sufixo + "</td></tr>";
     }
     const cor = MCORE[r.m] || "#555";
     const hora = r.hora ? '<span class="hora-badge" style="color:var(--p3)">' + esc(r.hora) + '</span>' : '<span style="color:var(--muted)">—</span>';
@@ -764,27 +742,20 @@ function renderViagens() {
     const obs  = r.obs ? '<span class="obs-txt">' + esc(r.obs) + '</span>' : "";
     htmlFut += '<tr class="row-futuro">'
       + '<td><span class="fut-badge">' + esc(fmtDia(r.dt)) + '</span></td>'
-      + '<td><div style="display:flex;align-items:center;gap:7px">'
-        + '<div class="av" style="background:' + cor + '18;color:' + cor + ';border:1.5px solid ' + cor + '50">' + esc(ini(r.m)) + '</div>'
-        + '<span style="font-weight:700;color:' + cor + ';font-size:13px">' + esc(r.m) + '</span>'
-        + '</div></td>'
+      + '<td><div style="display:flex;align-items:center;gap:7px"><div class="av" style="background:' + cor + '18;color:' + cor + ';border:1.5px solid ' + cor + '50">' + esc(ini(r.m)) + '</div>'
+      + '<span style="font-weight:700;color:' + cor + ';font-size:13px">' + esc(r.m) + '</span></div></td>'
       + '<td><span class="dest-badge">📍 ' + esc(r.d) + '</span></td>'
       + '<td><span class="placa-badge">' + esc(r.placa||"—") + '</span></td>'
-      + '<td>' + hora + '</td>'
-      + '<td>' + pac + '</td>'
-      + '<td>' + obs + '</td>'
-      + '</tr>';
+      + '<td>' + hora + '</td><td>' + pac + '</td><td>' + obs + '</td></tr>';
   });
   document.getElementById("futurasTbody").innerHTML = htmlFut;
 
-  // Conta datas distintas nas futuras
   const datasFut = [...new Set(rowsFuturas.map(function(r){ return r.dt; }))];
   futSub.textContent = rowsFuturas.length + " viagem" + (rowsFuturas.length!==1?"s":"")
     + " · " + datasFut.length + " dia" + (datasFut.length!==1?"s":"");
 }
 
 function renderViagensTbody(hojeKey, ontemKey) {
-  // Se chamado sem args (ex: pelo input de busca), recalcula as chaves
   if (!hojeKey) {
     const agora = new Date();
     const ref = new Date(agora);
@@ -794,51 +765,36 @@ function renderViagensTbody(hojeKey, ontemKey) {
     const ont = new Date(ref); ont.setDate(ref.getDate() - 1);
     ontemKey = dk(ont);
   }
-
   const q = norm(document.getElementById("viagensSearch").value || "");
-  const filtered = q
-    ? viagensCache.filter(function(r){
-        return norm(r.m).includes(q) || norm(r.d).includes(q)
-          || norm(r.placa||"").includes(q) || (r.dt||"").includes(q);
-      })
-    : viagensCache;
+  const filtered = q ? viagensCache.filter(function(r){
+    return norm(r.m).includes(q)||norm(r.d).includes(q)||norm(r.placa||"").includes(q)||(r.dt||"").includes(q);
+  }) : viagensCache;
 
   if (!filtered.length) {
-    document.getElementById("viagensTbody").innerHTML =
-      '<tr><td colspan="7" class="empty">Nenhuma viagem registrada para ontem ou hoje.</td></tr>';
+    document.getElementById("viagensTbody").innerHTML = '<tr><td colspan="7" class="empty">Nenhuma viagem registrada para ontem ou hoje.</td></tr>';
     return;
   }
-
   document.getElementById("viagensTbody").innerHTML = filtered.map(function(r) {
     const cor = MCORE[r.m] || "#555";
     const rKey = dtToKey(r.dt);
     const isHoje  = rKey === hojeKey;
     const rowClass = isHoje ? "row-hoje" : "row-ontem";
-
     const diaLabel = isHoje
       ? '<span style="color:var(--p1);font-weight:800;font-size:12px">● HOJE</span><br><span style="font-size:10px;color:var(--muted)">' + fmtDia(r.dt) + '</span>'
       : '<span style="color:var(--p2);font-weight:700;font-size:12px">ONTEM</span><br><span style="font-size:10px;color:var(--muted)">' + fmtDia(r.dt) + '</span>';
-
     const hora = r.hora ? '<span class="hora-badge">' + esc(r.hora) + '</span>' : '<span style="color:var(--muted)">—</span>';
     const pac  = parseInt(r.pac) > 0 ? '<span class="pac-badge">' + esc(r.pac) + '</span>' : '<span style="color:var(--muted)">—</span>';
     const obs  = r.obs ? '<span class="obs-txt">' + esc(r.obs) + '</span>' : "";
-
     return '<tr class="' + rowClass + '">'
       + '<td>' + diaLabel + '</td>'
-      + '<td><div style="display:flex;align-items:center;gap:7px">'
-        + '<div class="av" style="background:' + cor + '18;color:' + cor + ';border:1.5px solid ' + cor + '50">' + esc(ini(r.m)) + '</div>'
-        + '<span style="font-weight:700;color:' + cor + ';font-size:13px">' + esc(r.m) + '</span>'
-        + '</div></td>'
+      + '<td><div style="display:flex;align-items:center;gap:7px"><div class="av" style="background:' + cor + '18;color:' + cor + ';border:1.5px solid ' + cor + '50">' + esc(ini(r.m)) + '</div>'
+      + '<span style="font-weight:700;color:' + cor + ';font-size:13px">' + esc(r.m) + '</span></div></td>'
       + '<td><span class="dest-badge">📍 ' + esc(r.d) + '</span></td>'
       + '<td><span class="placa-badge">' + esc(r.placa||"—") + '</span></td>'
-      + '<td>' + hora + '</td>'
-      + '<td>' + pac + '</td>'
-      + '<td>' + obs + '</td>'
-      + '</tr>';
+      + '<td>' + hora + '</td><td>' + pac + '</td><td>' + obs + '</td></tr>';
   }).join("");
 }
 
-// ── RENDER ESCALA DO MÊS ─────────────────────────────────────────────────────
 function renderEscala() {
   const hojeKey = dk(new Date());
   const dias = [];
@@ -884,7 +840,6 @@ function renderEscala() {
   document.getElementById("escalaSub").textContent = CONFIG.MES_LABEL + " · " + dias.length + " dias";
 }
 
-// ── FILTROS / ESTATÍSTICAS ────────────────────────────────────────────────────
 function getF() {
   return VIAGENS.filter(function(r) {
     return (selMes.size===0||selMes.has(r.mes))
@@ -954,8 +909,8 @@ function renderStats() {
   let hh='<div class="heat-hdr">'+topD.map(function(d){return'<span title="'+esc(d)+'">'+esc(d)+'</span>';}).join("")+'</div>';
   list.forEach(function(d){hh+='<div class="heat-row"><div class="heat-lbl">'+esc(d.name.split(" ")[0])+'</div>';topD.forEach(function(dest){const v=d.dests[dest]||0;const al=v>0?Math.min(1,.3+v/maxV*.7):.08;hh+='<div class="heat-cell" style="'+(v>0?"background:"+d.color+";opacity:"+al:"background:var(--s3)")+'" onmouseenter="showTip(event,\'<b>'+esc(d.name)+'</b> → '+esc(dest)+'<br>'+v+' viagens\')" onmouseleave="hideTip()" onmousemove="moveTip(event)">'+(v||"")+'</div>';});hh+="</div>";});
   document.getElementById("heatWrap").innerHTML=hh;
-  const ds=Object.entries(dc).sort(function(a,b){return b[1]-a[1];});const dm=ds[0]?.[1]||1,dt=ds.reduce(function(s,e){return s+e[1];},0);
-  document.getElementById("destTbody").innerHTML=ds.map(function(entry){const[d,t]=entry;return'<tr><td style="font-weight:600">📍 '+esc(d)+'</td><td style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:800;color:var(--p2)">'+t+'</td><td><div class="bar-row"><div class="bar-bg"><div class="bar-fill" style="width:'+(t/dm*100).toFixed(1)+'%;background:var(--p2)"></div></div><span class="bar-pct">'+(t/dt*100).toFixed(1)+'%</span></div></td></tr>';}).join("");
+  const ds=Object.entries(dc).sort(function(a,b){return b[1]-a[1];});const dm=ds[0]?.[1]||1,dt2=ds.reduce(function(s,e){return s+e[1];},0);
+  document.getElementById("destTbody").innerHTML=ds.map(function(entry){const[d,t]=entry;return'<tr><td style="font-weight:600">📍 '+esc(d)+'</td><td style="font-family:\'Barlow Condensed\',sans-serif;font-size:18px;font-weight:800;color:var(--p2)">'+t+'</td><td><div class="bar-row"><div class="bar-bg"><div class="bar-fill" style="width:'+(t/dm*100).toFixed(1)+'%;background:var(--p2)"></div></div><span class="bar-pct">'+(t/dt2*100).toFixed(1)+'%</span></div></td></tr>';}).join("");
   logRowsCache=[...rows].sort(function(a,b){return b.dt.split("/").reverse().join("").localeCompare(a.dt.split("/").reverse().join(""));});
   renderLog();
 }
@@ -967,7 +922,6 @@ function renderLog() {
   document.getElementById("logTbody").innerHTML=filtered.slice(0,300).map(function(r){const cor=MCORE[r.m]||"#555";return'<tr><td style="color:var(--muted);font-size:12px">'+esc(r.dt)+'</td><td><div style="display:flex;align-items:center;gap:7px"><div class="av" style="background:'+cor+'18;color:'+cor+';border:1.5px solid '+cor+'50">'+esc(ini(r.m))+'</div><span style="font-weight:600;color:'+cor+'">'+esc(r.m)+'</span></div></td><td>📍 '+esc(r.d)+'</td><td><span class="vb">'+esc(r.placa||"—")+'</span></td><td><span class="hv">'+esc(r.hora||"—")+'</span></td><td style="font-size:11px;color:var(--gold)">'+esc(r.obs)+'</td></tr>';}).join("");
 }
 
-// ── CSV / FETCH ───────────────────────────────────────────────────────────────
 function splitCSV(line) {
   const p=[]; let cur="",inQ=false;
   for (const c of line){ if(c==='"'){inQ=!inQ;}else if(c===','&&!inQ){p.push(cur.trim());cur="";}else cur+=c; }
@@ -1017,10 +971,10 @@ async function fetchViagens() {
   }
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
 function init() {
   document.getElementById("footerUTI").textContent  = CONFIG.VEICULOS_UTI || "—";
   document.getElementById("footerFone").textContent = CONFIG.FONE_TRANSPORTE || "—";
+  renderValBanner(MOTS, ESC_INICIO, ESC_FIM);
   renderPlantao();
   renderEscala();
   fetchViagens();
@@ -1031,6 +985,7 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.addEventListener("click", function() { switchTab(btn.dataset.tab); });
   });
   document.getElementById("btnAtualizar").addEventListener("click", function() {
+    renderValBanner(MOTS, ESC_INICIO, ESC_FIM);
     renderPlantao(); renderEscala(); fetchViagens();
   });
   document.getElementById("btnResetF").addEventListener("click", resetF);
