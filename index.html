@@ -478,7 +478,7 @@ function renderValBanner(mots, iniDate, fimDate) {
     html = '<div class="val-item val-ok">✅ Escala válida — nenhum conflito detectado para ' + CONFIG.MES_LABEL + '</div>';
   } else {
     if (errs.length)  html += errs.map(function(i){ return '<div class="val-item val-err">' + esc(i.msg) + '</div>'; }).join("");
-    if (warns.length) html += '<div class="val-item val-warn">⚠️ ' + warns.length + 'CASTRO </div>';
+    if (warns.length) html += '<div class="val-item val-warn">⚠️ ' + warns.length + CASTRO </div>';
   }
   document.getElementById("valBanner").innerHTML = html;
 }
