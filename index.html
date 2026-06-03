@@ -146,8 +146,6 @@ table.log tbody tr:hover td{background:var(--s2)}
 footer{border-top:1px solid var(--border);padding:12px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:18px}
 footer p{font-size:11px;color:var(--muted)}
 .empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}
-
-/* ── ABA VIAGENS ── */
 .viagens-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:16px}
 .dia-header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--s2);border-bottom:1px solid var(--border)}
 .dia-label{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;letter-spacing:1px}
@@ -171,21 +169,16 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
 .viagens-search{flex:1;border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;font-family:'Barlow',sans-serif;background:var(--s1);color:var(--text);outline:none;transition:border-color .2s}
 .viagens-search:focus{border-color:var(--p1)}
 .viagens-search::placeholder{color:var(--muted)}
-
-/* Viagens futuras */
 .row-futuro td{background:#f0f4fb}
 .row-futuro:hover td{background:#e8eef8!important}
 .row-sep-data td{background:var(--s3);padding:7px 14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--border)}
 .fut-badge{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--p3)}
 .aviso-postagem{background:#e8f0fb;border:1px solid #90b8e8;border-radius:10px;padding:9px 16px;margin-bottom:14px;font-size:12px;color:var(--p3);display:flex;align-items:center;gap:8px}
-
-/* ── BANNER DE VALIDAÇÃO ── */
 .val-banner{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .val-item{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid}
 .val-ok{background:#e6f9f2;border-color:#9adfc5;color:#0a7c55}
 .val-warn{background:#fdf5e0;border-color:#e8c96a;color:#b07800}
 .val-err{background:#fff0f2;border-color:#f0aab5;color:#c0283e}
-
 @media(max-width:1100px){.row2,.row3{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,1fr)}.plantao-grid{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr 1fr}.viagens-kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.plantao-grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.page{padding:12px}.tab-btn{font-size:13px;padding:10px 12px}.brand-text h1{font-size:17px}.viagens-kpis{grid-template-columns:repeat(2,1fr)}}
 @media print{
@@ -252,7 +245,7 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
   </div>
 </div>
 
-<!-- ── ABA VIAGENS ── -->
+<!-- ABA VIAGENS -->
 <div class="tab-panel" id="panelViagens">
   <div class="viagens-kpis" style="grid-template-columns:repeat(5,1fr)">
     <div class="kpi c0"><div class="kpi-lbl">Viagens Hoje</div><div class="kpi-val" id="vkHoje">--</div><div class="kpi-sub" id="vkHojeData">--</div></div>
@@ -346,80 +339,37 @@ table.vt tr.row-ontem:hover td{background:#faf0d8}
 
 <script>
 // =============================================================================
-//  ✏️  ÁREA DE EDIÇÃO MENSAL — ATUALIZE AQUI E FAÇA COMMIT
+//  ÁREA DE EDIÇÃO MENSAL
 // =============================================================================
-
 const CONFIG = {
-
-  // ══════════════════════════════════════════════════════════════════════════
-  // 1. CABEÇALHO DO MÊS
-  // ══════════════════════════════════════════════════════════════════════════
   MES_LABEL : "MAIO 2026",
   INICIO    : "06/05/2026",
   FIM       : "05/06/2026",
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // 2. RODÍZIO MENSAL — COMO ATUALIZAR NO GITHUB
-  //
-  //  ┌─ REGRA ──────────────────────────────────────────────────────────────┐
-  //  │  Todo início de mês, 3 passos:                                      │
-  //  │  1. Recorte a linha marcada "▼ PRÓXIMO A DESCER"                    │
-  //  │  2. Cole-a como última linha (antes do comentário "← cole aqui")    │
-  //  │  3. Atualize INICIO, FIM, MES_LABEL e as ESCALAs de todos          │
-  //  └──────────────────────────────────────────────────────────────────────┘
-  //
-  //  Como fazer no GitHub:
-  //  1. Clique no lápis ✏️ para editar este arquivo
-  //  2. Selecione a linha marcada com ← PRÓXIMO A DESCER (Home → Shift+↓)
-  //  3. Recorte: Ctrl+X  (Mac: ⌘+X)
-  //  4. Posicione o cursor na linha "← cole aqui..." e cole: Ctrl+V
-  //  5. Atualize INICIO / FIM / MES_LABEL para o novo ciclo
-  //  6. Atualize a ESCALA de cada motorista com os dias/postos do novo mês
-  //  7. Commit changes — o dashboard atualiza automaticamente
-  //
-  //  ┌──────────────────────────────────────────────────────────────────────┐
-  //  │  MAIO 2026 — próximo a descer no rodízio de JUNHO: EDMAR          │
-  //  └──────────────────────────────────────────────────────────────────────┘
-  //
-  //  Formato ESCALA:  "DIA:POSTO  DIA:POSTO  ..."
-  //  Postos válidos:  P1  P2  P3  FERIAS  RECESSO
-  //  Intervalos:      "6-25:FERIAS"   "17-23:RECESSO"
-  //  Dias < INICIO → pertencem ao mês seguinte (maio neste caso)
-  //
-  // ══════════════════════════════════════════════════════════════════════════
   MOTORISTAS: [
-
-    // ▼ PRÓXIMO A DESCER — recorte esta linha e cole no final em MAIO ▼
-     { NOME:"EDMAR",        FONE:"99947-5310", PLACA:"RWH-0D64", ESCALA:"6:P1  10:P2  14:P1  18:P2  22:P1  26:P2  30:P1   3:P2  5-11:RECESSO" },
-    // ▲ ──────────────────────────────────────────────────────────── ▲
-
-    { NOME:"JOSE MANOEL",  FONE:"99265-1581", PLACA:"SID-7G71", ESCALA:"6:P2  10:P1  14:P2  18:P1  22:P2  26:P1  30:P2    3:P1" },
-    { NOME:"ROBSON",       FONE:"99641-7423", PLACA:"RWH-0D67", ESCALA:"7:P3  11:P1  15:P2  19:P3  23:P1  27:P2  31:P3    4:P1" },
-    { NOME:"COSME",        FONE:"99677-0467", PLACA:"SYX-9F79", ESCALA:"7:P1  11:P2  15:P3  19:P1  23:P2  27:P3  31:P1    4:P2" },
-    { NOME:"SILVIO",       FONE:"99644-7196", PLACA:"TEA-4A97", ESCALA:"7:P2  11:P3  15:P1  19:P2  23:P3  27:P1  31:P2    4:P3" },
-    { NOME:"PAULO GAIOLA", FONE:"99957-2433", PLACA:"RWB-4G28", ESCALA:"8:P1  12:P2  16:P3  20:P1  24:P2  28:P3  1:P1     5:P2" },
-    { NOME:"IVO LEAL",     FONE:"99697-3163", PLACA:"RWA-0J92", ESCALA:"8:P2  12:P3  16:P1  20:P2  24:P3  28:P1  1:P2     5:P3" },
-    { NOME:"ODAIR",        FONE:"99949-6233", PLACA:"QAU-4F33", ESCALA:"8:P3  12:P1  16:P2  20:P3  24:P1  28:P2  1:P3     5:P1" },
+    // ▼ PRÓXIMO A DESCER em JUNHO: EDMAR
+    { NOME:"EDMAR",        FONE:"99947-5310", PLACA:"RWH-0D64", ESCALA:"6:P1  10:P2  14:P1  18:P2  22:P1  26:P2  30:P1  3:P2  5:RECESSO" },
+    { NOME:"JOSE MANOEL",  FONE:"99265-1581", PLACA:"SID-7G71", ESCALA:"6:P2  10:P1  14:P2  18:P1  22:P2  26:P1  30:P2  3:P1" },
+    { NOME:"ROBSON",       FONE:"99641-7423", PLACA:"RWH-0D67", ESCALA:"7:P3  11:P1  15:P2  19:P3  23:P1  27:P2  31:P3  4:P1" },
+    { NOME:"COSME",        FONE:"99677-0467", PLACA:"SYX-9F79", ESCALA:"7:P1  11:P2  15:P3  19:P1  23:P2  27:P3  31:P1  4:P2" },
+    { NOME:"SILVIO",       FONE:"99644-7196", PLACA:"TEA-4A97", ESCALA:"7:P2  11:P3  15:P1  19:P2  23:P3  27:P1  31:P2  4:P3" },
+    { NOME:"PAULO GAIOLA", FONE:"99957-2433", PLACA:"RWB-4G28", ESCALA:"8:P1  12:P2  16:P3  20:P1  24:P2  28:P3  1:P1  5:P2" },
+    { NOME:"IVO LEAL",     FONE:"99697-3163", PLACA:"RWA-0J92", ESCALA:"8:P2  12:P3  16:P1  20:P2  24:P3  28:P1  1:P2  5:P3" },
+    { NOME:"ODAIR",        FONE:"99949-6233", PLACA:"QAU-4F33", ESCALA:"8:P3  12:P1  16:P2  20:P3  24:P1  28:P2  1:P3  5:P1" },
     { NOME:"EDIPO",        FONE:"99122-6035", PLACA:"TRX-2F71", ESCALA:"9:P2  13:P3  17:P1  21:P2  25:P3  29:P1  2:P2" },
     { NOME:"PELKIN",       FONE:"99884-4437", PLACA:"SIL-9E23", ESCALA:"9:P1  13:P2  17:P3  21:P1  25:P2  29:P3  2:P1" },
     { NOME:"ROMÁRIO",      FONE:"98139-4366", PLACA:"QAB-5799", ESCALA:"9:P3  13:P1  17:P2  21:P3  25:P1  29:P2  2:P3" },
-   
-    // ← cole aqui a linha recortada do topo (antes deste comentário)
   ],
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // 4. INFORMAÇÕES COMPLEMENTARES
-  // ══════════════════════════════════════════════════════════════════════════
   VEICULOS_UTI    : "TRX-2F71 · RWA-0J92",
   FONE_TRANSPORTE : "99964-0675",
   VIAGENS_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS6FJhhY7ifdW7q8c3mObGodJm8fz2mfcLo2qns7aWzUbzJfCKOebOYqEI31sNlsn1vuTAFB__q2egV/pub?gid=164510149&single=true&output=csv",
 };
 
 // =============================================================================
-//  ⚙️  SISTEMA — NÃO EDITAR ABAIXO DESTA LINHA
+//  SISTEMA — NÃO EDITAR ABAIXO
 // =============================================================================
 
-// ── VALIDAÇÃO AUTOMÁTICA DA ESCALA ───────────────────────────────────────────
 function validarEscala(mots, iniDate, fimDate) {
   const alerts = [];
   const dayMap = {};
@@ -430,7 +380,6 @@ function validarEscala(mots, iniDate, fimDate) {
       dayMap[key][turno].push(m.nome);
     });
   });
-  // 1. Conflito de turno no mesmo dia
   Object.entries(dayMap).forEach(function([key, turnos]) {
     ["P1","P2","P3"].forEach(function(t) {
       if (turnos[t] && turnos[t].length > 1) {
@@ -439,7 +388,6 @@ function validarEscala(mots, iniDate, fimDate) {
       }
     });
   });
-  // 2. Motorista de férias escalado para trabalhar no mesmo dia
   mots.forEach(function(m) {
     const ferDias = Object.entries(m.escalaMap).filter(function([,v]){ return v==="FERIAS"||v==="RECESSO"; }).map(function([k]){ return k; });
     const trabDias = Object.entries(m.escalaMap).filter(function([,v]){ return v!=="FERIAS"&&v!=="RECESSO"; }).map(function([k]){ return k; });
@@ -450,7 +398,6 @@ function validarEscala(mots, iniDate, fimDate) {
       }
     });
   });
-  // 3. P3 descoberto em dias com só 2 do grupo ativo
   const cur = new Date(iniDate);
   while (cur <= fimDate) {
     const key = dk(cur);
@@ -460,10 +407,9 @@ function validarEscala(mots, iniDate, fimDate) {
     }
     cur.setDate(cur.getDate()+1);
   }
-  // 4. Motorista duplicado
   const nomesVistos = new Set();
   mots.forEach(function(m) {
-    if (nomesVistos.has(m.nome)) alerts.push({ tipo:"err", msg:"⚠️ Motorista duplicado na escala: " + m.nome });
+    if (nomesVistos.has(m.nome)) alerts.push({ tipo:"err", msg:"⚠️ Motorista duplicado: " + m.nome });
     nomesVistos.add(m.nome);
   });
   return alerts;
@@ -478,10 +424,9 @@ function renderValBanner(mots, iniDate, fimDate) {
     html = '<div class="val-item val-ok">✅ Escala válida — nenhum conflito detectado para ' + CONFIG.MES_LABEL + '</div>';
   } else {
     if (errs.length)  html += errs.map(function(i){ return '<div class="val-item val-err">' + esc(i.msg) + '</div>'; }).join("");
-    if (warns.length) html += '<div class="val-item val-warn">⚠️ ' + warns.length + ' aviso(s) na escala — verifique P3 descoberto</div>';
+    if (warns.length) html += '<div class="val-item val-warn">⚠️ ' + warns.length + ' aviso(s) — P3 descoberto em alguns dias</div>';
   }
   document.getElementById("valBanner").innerHTML = html;
-}
 }
 
 function parseConfig() {
